@@ -6,7 +6,7 @@
 /*   By: oidrissi <oidrissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 20:55:44 by oidrissi          #+#    #+#             */
-/*   Updated: 2021/11/15 21:25:43 by oidrissi         ###   ########.fr       */
+/*   Updated: 2021/11/15 22:42:36 by oidrissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
