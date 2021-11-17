@@ -6,7 +6,7 @@
 /*   By: oidrissi <oidrissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 21:23:05 by oidrissi          #+#    #+#             */
-/*   Updated: 2021/11/14 21:38:29 by oidrissi         ###   ########.fr       */
+/*   Updated: 2021/11/16 14:48:09 by oidrissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,23 @@ size_t	ft_strlen(const char *s)
     while (s[i])
         i++;
     return (i);
+}
+
+char	*ft_strcat(char *dest, const char *src)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	j = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0')
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
