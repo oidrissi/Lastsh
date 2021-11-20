@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_alloc.c                                         :+:      :+:    :+:   */
+/*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oidrissi <oidrissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 14:47:12 by oidrissi          #+#    #+#             */
-/*   Updated: 2021/11/19 20:11:09 by oidrissi         ###   ########.fr       */
+/*   Created: 2021/11/17 20:13:10 by oidrissi          #+#    #+#             */
+/*   Updated: 2021/11/18 00:25:30 by oidrissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+t_ast	*init_ast(int type)
 {
-	size_t i;
+    t_ast   *ast = malloc(sizeof(t_ast));
+    ast->type = type;
 
-	i = 0;
-	while (i < n)
-	{
-		((char *)dst)[i] = ((char *)src)[i];
-		i++;
-	}
-	return (dst);
-}
-
-void	*ft_realloc(void *ptr, size_t size)
-{
-	void *new_ptr;
-
-	new_ptr = malloc(size);
-	if (new_ptr == NULL)
-		return (NULL);
-	if (ptr != NULL)
-	{
-		ft_memcpy(new_ptr, ptr, size);
-		free(ptr);
-	}
-	return (new_ptr);
+    ast->function = NULL;
+	ast->function_call = NULL;
+	ast->function_arg_size = 0;
+	ast->string_value = NULL;
+    return (ast);
 }

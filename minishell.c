@@ -6,7 +6,7 @@
 /*   By: oidrissi <oidrissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 20:55:34 by oidrissi          #+#    #+#             */
-/*   Updated: 2021/11/17 01:48:57 by oidrissi         ###   ########.fr       */
+/*   Updated: 2021/11/20 07:44:20 by oidrissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,34 @@ char	*get_char_as_token(t_lexer *lexer)
 	return (str);
 }
 
+// if quotes are not closed, return 1
+int		check_quotes(char *line)
+{
+	int i;
+	int quotes;
+
+	i = 0;
+	quotes = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] == '\"')
+			quotes++;
+		i++;
+	}
+	if (quotes % 2 == 1)
+		return (1);
+	return (0);
+}
+
+int		parse_basic_errors(char *s)
+{
+	if (s[0] == '|' || s[ft_strlen(s) - 1] == '|')
+		return (1);
+	if (check_quotes(s))
+		return (1);
+	return (0);
+}
+
 int main(int ac, char **av, char **envp)
 {
 	(void)ac;
@@ -159,19 +187,25 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = readline(prompt);
-		if (line)
+		if (*line)
 			add_history(line);
+		if (parse_basic_errors(line))
+		{
+			write(1, "Error: invalid syntax\n", 23);
+			continue;
+		}
 		lexer = init_lexer(line);
 		while ((token = get_next_token(lexer)) != (void *)0)
 		{
-			if (g_error_status == 1)
-			{
-				printf("parse error\n");
-				g_error_status = 0;
-				break ;
-			}
 			printf("TOKEN : (%d;%s)\n", token->e_type, token->value);
 		}	
 	}
 	return (0);
 }
+
+// if (g_error_status == 1)
+// {
+// 	printf("parse error\n");
+// 	g_error_status = 0;
+// 	break ;
+// }
